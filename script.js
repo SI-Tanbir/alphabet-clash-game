@@ -137,5 +137,38 @@ function genAlphabet() {
     return list[random];
 }
 
+//special function to reset life and score;
+function reset(elementId,reset_value){
+    let reset= document.getElementById(elementId);
+    reset.innerText=reset_value;
+}
+
+
 
 //making play againg interection;
+
+function play_again(){
+    let window = document.getElementById('start-window');
+    window.classList.add('hidden');
+   
+    let playGround = document.getElementById('play-ground');
+    playGround.classList.remove('hidden');
+
+    let scoreboard = document.getElementById('socreboard');
+    scoreboard.classList.add('hidden');
+
+
+    reset('current-life',5); //reset life to 5
+    reset('live-score',0);//reset score to 0
+
+   
+
+
+
+
+
+
+
+
+
+}
