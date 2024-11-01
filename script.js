@@ -1,4 +1,7 @@
 document.getElementById('play-btn').addEventListener('click', function() {
+
+
+
     // Hide start window, show playground
     let window = document.getElementById('start-window');
     window.classList.add('hidden');
@@ -17,20 +20,96 @@ document.getElementById('play-btn').addEventListener('click', function() {
     // Set up keyboard listening and compare user input with the random alphabet
     document.addEventListener('keyup', function keyboardListening(event) {
         let userPressedKey = event.key.toLowerCase();  // Convert to lowercase to match random alphabet
+        
+
+        //initialization of score
+        score=0;
+
+        
+
 
         if (userPressedKey === random) {
             console.log("Correct key pressed:", userPressedKey);
+            
 
+            //now i am gonna update ing score;
+
+           
+            let score=document.getElementById('live-score').innerHTML;
+            let scoreNumber=Number(score);
+            console.log(scoreNumber=scoreNumber+1);
+            document.getElementById('live-score').innerText=scoreNumber;
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             removeKeyPressColor(userPressedKey);
             // Generate a new random alphabet and update display
             random = genAlphabet();  // Update `random` with the new alphabet
             p.innerText = random;
-
+            
             // Update key color for the new random alphabet
             addKeyPressColor(random);
+            
+            
+            return scoreNumber;
 
         } else {
             console.log("Wrong key pressed");
+            
+            let currentlifevalue=document.getElementById('current-life')
+            let currentLife=currentlifevalue.innerText;
+            let currentHealth=parseInt(currentLife);
+
+            let updateLife=currentHealth-1;
+
+            currentlifevalue.innerHTML=updateLife;
+
+
+            if ( updateLife == 0 ){
+
+                let playGround = document.getElementById('play-ground');
+                playGround.classList.add('hidden');
+
+                let scoreBoard = document.getElementById('socreboard');
+                scoreBoard.classList.remove('hidden');
+
+                let lastScore=document.getElementById('live-score');
+                let lastScoreUpdate= lastScore.innerText;
+
+                // finnal-score
+
+                let settingScore=document.getElementById('finnal-score');
+                settingScore.innerText=lastScoreUpdate;
+
+
+
+
+
+
+            }
+
+
+
+           
+
+
+
+
+            // document.getElementById('play-ground').classList.add('hidden');
+
+
+            // document.getElementById('socreboard').classList.remove('hidden');
+
+        
+
+            
         }
     });
 });
@@ -57,3 +136,6 @@ function genAlphabet() {
     let random = Math.floor(Math.random() * 26); // 26 letters in the alphabet
     return list[random];
 }
+
+
+//making play againg interection;
