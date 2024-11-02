@@ -14,7 +14,13 @@ function addingOrange(random) {
 function removingOrange(random) {
   document.getElementById(random).classList.remove("bg-orange-600");
 }
-
+// scoring-secting function
+function addScoringId(element) {
+  let score = document.getElementById(element);
+  let newscore = score.innerText;
+  let updateScore = parseInt(newscore);
+  return updateScore;
+}
 
 //generating random alphabets
 function alphabetGenerate() {
@@ -29,10 +35,7 @@ function alphabetGenerate() {
   return random;
 }
 
-
-
-function alphabetsSelectingByID(elementId,thigsvalue){
-
+function alphabetsSelectingByID(elementId, thigsvalue) {
   let p = document.getElementById(elementId);
   p.innerText = thigsvalue;
   //adding orage color in keyboards
@@ -49,14 +52,68 @@ document.getElementById("play-btn").addEventListener("click", function () {
 
   //selecting alphabetscreen
 
-  alphabetsSelectingByID('alphabetsScreen',random);
+  alphabetsSelectingByID("alphabetsScreen", random);
 
-//adding orange color 
-    addingOrange(random);
-  
-  
+  //adding orange color
+  addingOrange(random);
+
+  document.addEventListener("keyup", function (event) {
+    let screenValue = document.getElementById("alphabetsScreen").innerText;
+    let pressKey = event.key;
+
+    removingOrange(pressKey); //removing the orange color after press
+
+    if (pressKey == screenValue) {
+      console.log("press the right key ", screenValue);
+      let random = alphabetGenerate();
+      removingOrange(random);
+      alphabetsSelectingByID("alphabetsScreen", random);
+      addingOrange(random);
+
+      let score = document.getElementById("live-score");
+      let newscore = score.innerText;
+      let updateScore = parseInt(newscore);
+
+      updateScore += 1; // Increment score
+
+      score.innerText = updateScore; // Update the displayed score in the HTML
+
+      console.log(updateScore, "hello test"); // Check the new score in the console
+    } else {
+      console.log("press wrong key");
+      // current-life
+      let score = document.getElementById("current-life");
+      let newscore = score.innerText;
+      let updateScore = parseInt(newscore);
+
+      updateScore -= 1; // Increment score
+
+      score.innerText = updateScore;
+
+      if (updateScore == 0) {
+        hideSection("play-ground");
+        unhideSection("socreboard");
+
+        // Get the score from the "live-score" element
+        let score = addScoringId("live-score"); // This returns the score as a number
+        console.log(score, "live score");
+
+        // Get the final score element directly
+        let finnal = document.getElementById("finnal-score");
+
+        if (finnal) {
+          // Check if the element exists
+          finnal.innerText = score; // Set innerText to the retrieved score
+          console.log(finnal.innerText, "Final score displayed");
+        } else {
+          console.warn("Element with id 'finnal-score' not found.");
+        }
+
+        // finnal-score
+      }
+    }
+  });
 });
-
 
 //starting of  game making part
 
@@ -67,39 +124,6 @@ document.getElementById("play-btn").addEventListener("click", function () {
 
    else{
    wrong press}*/
-
-   document.addEventListener('keyup',function(event){
-
-     let screenValue=document.getElementById('alphabetsScreen').innerText;
-     let pressKey = event.key;
-    //  removingOrange(random);
-     
-     
-     
-     if(pressKey == screenValue){
-       console.log("press the right key ",screenValue);
-       let random = alphabetGenerate();
-      alphabetsSelectingByID('alphabetsScreen',random);
-      addingOrange(random);
-
-     }
-
-     else{
-      console.log('press wrong key');
-     }
-
-
-
-
-
-   })
-
-
-
-
-
-
-
 
 //play-ground work
 
