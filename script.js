@@ -112,6 +112,35 @@ document.getElementById("play-btn").addEventListener("click", function () {
         // finnal-score
       }
     }
+
+
+
+    document.getElementById('play-again').addEventListener('click',function(){
+
+      
+      hideSection('socreboard');
+      unhideSection("play-ground")
+      //reseting the life
+      let score = document.getElementById("current-life");
+      score.innerText=5;
+
+      //reseting the socore
+      let live_score = document.getElementById("live-score");
+      live_score.innerText=0;
+
+
+
+
+
+
+    })
+
+
+
+
+
+
+
   });
 });
 
